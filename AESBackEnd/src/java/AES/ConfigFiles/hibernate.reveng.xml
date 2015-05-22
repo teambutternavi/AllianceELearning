@@ -6,4 +6,5 @@
   <table-filter match-name="course"/>
   <table-filter match-name="presentation"/>
   <table-filter match-name="user"/>
+  <table-filter match-name="examrecords"/>
 </hibernate-reverse-engineering>

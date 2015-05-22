@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 05 21, 15 2:40:34 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="AES.Model.Examrecords" table="examrecords" catalog="springpractice" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="examid" type="java.lang.Integer">
+            <column name="examid" />
+        </property>
+        <property name="userid" type="java.lang.Integer">
+            <column name="userid" />
+        </property>
+        <property name="score" type="java.lang.Integer">
+            <column name="score" />
+        </property>
+        <property name="dateTaken" type="date">
+            <column name="dateTaken" length="10" />
+        </property>
+    </class>
+</hibernate-mapping>
