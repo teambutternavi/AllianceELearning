@@ -130,7 +130,6 @@ public class Question {
     public static Question generateQuestion(Element elem){
         Question question = null;
         if(elem!=null){
-            /*
             question = new Question();
             List<Element> elems = XMLOperations.removeNodesWithoutText(elem.getChildNodes());
             Element mes = elems.get(0);
@@ -138,7 +137,6 @@ public class Question {
             List<Element> c_answers = XMLOperations.removeNodesWithoutText(elems.get(2).getChildNodes());
             if(mes!=null)
                 question.setMessage(((Text)mes.getFirstChild()).getWholeText());
-            
             for(Element element:p_answers ){
                 String answer = ((Text)element.getFirstChild()).getWholeText();
                 question.addPossibleAnswer(answer);
@@ -146,27 +144,6 @@ public class Question {
             for(Element element:c_answers ){
                 String answer = ((Text)element.getFirstChild()).getWholeText();
                 question.addCorrecteAnswer(answer);
-            }
-                    */
-            Element message=null;
-            int i_m=0;
-            while(message==null || i_m>=elem.getChildNodes().getLength()){
-                message = (Element)elem.getElementsByTagName("message").item(i_m++);
-            }
-            i_m = 0;
-            Text mes = null;
-            while(mes==null || i_m>=message.getChildNodes().getLength()){
-                mes = (Text)message.getChildNodes().item(i_m);
-            }
-            if(mes!=null)
-                question.setMessage(mes.toString());
-            NodeList p_answers = ((Element)elem.getElementsByTagName("p_answer").item(0)).getElementsByTagName("answer");
-            for(int i=0;i<p_answers.getLength();i++){
-                Text temp = (Text)p_answers.item(i).getFirstChild();
-                if(temp!=null){
-                    question.addPossibleAnswer(temp.toString());
-                    System.out.println(temp);
-                }
             }
             
         }
