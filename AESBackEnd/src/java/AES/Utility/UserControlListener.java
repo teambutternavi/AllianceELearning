@@ -9,7 +9,6 @@ import AES.Model.User;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionContext;
 import javax.servlet.http.HttpSessionEvent;
 
 /**
