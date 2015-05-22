@@ -59,7 +59,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#" class="social-a"><img src="img/fb.png" class="head-social"></a>
+                    <a href="test.htm" class="social-a"><img src="img/fb.png" class="head-social"></a>
                 </li>
                 <li>
                     <a href="#" class="social-a"><img src="img/tw.png" class="head-social"></a>

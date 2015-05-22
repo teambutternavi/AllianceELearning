@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AES/AESBackEnd/src/java/AES/Model/Question.java</file>
-            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AES/AESBackEnd/src/java/AES/Model/XMLOperations.java</file>
-            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AES/AESBackEnd/src/java/AES/Model/Exam.java</file>
+            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AllianceELearning/AESBackEnd/src/java/AES/Controllers/LoginController.java</file>
+            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AllianceELearning/AESBackEnd/src/java/dbProperties.properties</file>
+            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AllianceELearning/AESBackEnd/src/java/AES/DAO/CourseDAO.java</file>
+            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AllianceELearning/AESBackEnd/src/java/AES/Model/Exam.hbm.xml</file>
+            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AllianceELearning/AESBackEnd/src/java/AES/Utility/UserControlListener.java</file>
+            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AllianceELearning/AESBackEnd/src/java/AES/Model/Question.java</file>
+            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AllianceELearning/AESBackEnd/src/java/AES/DAO/DatabaseManager.java</file>
+            <file>file:/C:/Users/Ted%20Ian%20Osias/Documents/GitHub/AllianceELearning/AESBackEnd/src/java/AES/DAO/UserDAO.java</file>
         </group>
     </open-files>
 </project-private>
