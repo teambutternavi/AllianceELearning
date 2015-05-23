@@ -49,6 +49,21 @@ public class PresentationDAO {
                 
     
     }
+                public static void addPresentation(Presentation p) throws IOException, ClassNotFoundException, SQLException, Exception{   
+               if(!contains(p.getTitle())){
+             String query="Insert into presentation (title,author,filepath,creatorid,description) values(?,?,?,?,?)";
+            PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
+             ps.setString(1, p.getTitle());
+             ps.setString(2, p.getAuthor());
+             ps.setString(3,p.getFilepath());
+             ps.setInt(4, p.getCreatorId());
+             ps.setString(5,p.getDescription());
+             ps.execute();
+               }
+               else throw new Exception("title already exists") ;
+                
+    
+    }
     public static void deletePresentation(int id) throws IOException, ClassNotFoundException, SQLException
     {
            try{    
@@ -56,6 +71,17 @@ public class PresentationDAO {
                     String query="Delete from presentation where id=?";
                     PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
                     ps.setInt(1,id);
+                    ps.execute();}
+            }
+           catch(Exception e){e.printStackTrace();}
+    }
+       public static void deletePresentation(String title) throws IOException, ClassNotFoundException, SQLException
+    {
+           try{    
+               if(contains(title)){
+                    String query="Delete from presentation where title=?";
+                    PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
+                    ps.setString(1,title);
                     ps.execute();}
             }
            catch(Exception e){e.printStackTrace();}
@@ -75,6 +101,7 @@ public class PresentationDAO {
        p.setFilepath(rs.getString("filepath"));
        p.setId(rs.getInt("id"));
        p.setTitle(rs.getString("title"));
+       p.setDescription(rs.getString("description"));
      
         }
         else throw new Exception("presentation does not exist");
