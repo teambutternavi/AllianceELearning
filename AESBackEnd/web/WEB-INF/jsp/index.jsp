@@ -6,6 +6,9 @@
 
 <%@page import="AES.Model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    System.out.println("Nisud sa index");
+%>
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -42,7 +45,7 @@
             <button type="submit" id="okbtn" class="btn btn-primary btn-lg btn-block" name="submit">Login</button>
             <br>
             <div>
-                <a href="#" class="login-url">Forgot Password?</a>
+                <a href="test.htm" class="login-url">Forgot Password?</a>
             </div>
             <div>
                 <a href="register.htm" class="login-url">Not enrolled yet?</a>
@@ -59,7 +62,7 @@
             </div>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="test.htm" class="social-a"><img src="img/fb.png" class="head-social"></a>
+                    <a href="#" class="social-a"><img src="img/fb.png" class="head-social"></a>
                 </li>
                 <li>
                     <a href="#" class="social-a"><img src="img/tw.png" class="head-social"></a>
