@@ -32,7 +32,8 @@ public class UserDAO {
         ps.setString(1, username);
         ps.setString(2,  password);
         ps.setInt(3, userType);
-        ok = ps.execute();
+        ps.execute();
+        ok = true;
         }
         catch(IOException | ClassNotFoundException | SQLException e){}
         return ok;
