@@ -25,7 +25,6 @@ import java.util.List;
 public class ExamRecordsDAO {
      public static boolean addExamRecord(int examid,int userid, int score, Date date){
         boolean ok = false;
-        
         try{
         String sql = "Insert into examrecords (examid, userid, score, dateTaken) values(?,?,?,?)";
         PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
@@ -33,11 +32,11 @@ public class ExamRecordsDAO {
         ps.setInt(2, userid);
         ps.setInt(3, score);
         ps.setDate(4, date);
-        ok = ps.execute();
+        ps.execute();
+        ok=true;
         }
         catch(Exception e){
             e.printStackTrace();
-        
         }
         return ok;
     }
@@ -50,7 +49,8 @@ public class ExamRecordsDAO {
       String sql = "Delete from examrecords where id=?";
       PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
       ps.setInt(1, id);
-      ok = ps.execute();
+      ps.execute();
+      ok=true;
       }
       catch(Exception e){
           e.printStackTrace();
@@ -70,7 +70,6 @@ public class ExamRecordsDAO {
             while(rs.next()){
                 temp.add(getExamRecordById(rs.getInt("id")));
             }
-          
         }
         catch(Exception e){e.printStackTrace();}
         return temp;
@@ -122,7 +121,8 @@ public class ExamRecordsDAO {
         ps.setInt(3, score);
         ps.setDate(4, date);
         ps.setInt(5, id);
-        ok = ps.execute();
+        ps.execute();
+        ok=true;
        }
      catch(Exception e){
             e.printStackTrace();
@@ -177,31 +177,7 @@ public class ExamRecordsDAO {
         }
         return result;
     }
-   /*
-   public static List<User> getExaminers(int examid){
-   List<User> examiners = new ArrayList();
-   User temp=null;
-    try{
-        String sql = "Select * from examrecords where examid=?";
-        String sql2 = "Select * from user where userid=?";
-        PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
-        PreparedStatement ps2 = DatabaseManager.getInstance().getStatement(sql2);
-        ps.setInt(1, examid);
-        ResultSet rs = ps.executeQuery();
-        ps2.setInt(1, rs.getInt("userid"));
-        ResultSet rs2 = ps2.executeQuery();
-        if(rs.next()){
-        temp.setUserid(rs.getInt("userid"));
-        temp.setUsername(rs2.getString("username"));
-        }
-        examiners.add(temp);
-        }catch( Exception e){
-            e.printStackTrace();
-        }
-        return examiners;
-    }
-   
-  */
+ 
    public static List<User> getExaminers(int examid){
    List<User> examiners = new ArrayList();
    try{
@@ -230,10 +206,7 @@ public class ExamRecordsDAO {
      while(rs.next()){
         if(ExamDAO.getExamById(rs.getInt("examid"))!=null){
          exams.add(ExamDAO.getExamById(rs.getInt("examid")));
-         //System.out.println(rs.getInt("examid") + "" + rs.getInt("score"));
-        }
-         
-        
+        }  
     }
    }
      catch(Exception e){e.printStackTrace();}

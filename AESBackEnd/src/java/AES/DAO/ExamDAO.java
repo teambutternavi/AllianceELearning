@@ -33,7 +33,8 @@ public class ExamDAO {
         ps.setString(3,filepath);
         ps.setInt(4, creatorid);
         ps.setInt(5, score);
-        ok = ps.execute();
+        ps.execute();
+        ok=true;
         }
         catch(Exception e){
             e.printStackTrace();
@@ -112,30 +113,30 @@ public class ExamDAO {
         ps.setInt(3, creatorid);
         ps.setInt(4, score);
         ps.setString(5, title);
-        ok = ps.execute();
+        ps.execute();
+        ok=true;
        }
      catch(Exception e){
             e.printStackTrace();
         }
      }
-     else{System.out.println("Doesnt exist");}
      return ok;
      }
      
     public static boolean removeExam(String title){
       boolean ok = false;
       if(exists(title)){
-      try{
-      String sql = "Delete from exam where title=?";
-      PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
-      ps.setString(1, title);
-      ok = ps.execute();
+        try{
+        String sql = "Delete from exam where title=?";
+        PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
+        ps.setString(1, title);
+        ps.execute();
+        ok=true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
       }
-      catch(Exception e){
-          e.printStackTrace();
-      }
-      }
-      else{System.out.println("Doesnt exists");}
       return ok;
     }
     
@@ -155,6 +156,5 @@ public class ExamDAO {
         return temp;
     }
     public static void main(String args[]){
-   
     }
 }
