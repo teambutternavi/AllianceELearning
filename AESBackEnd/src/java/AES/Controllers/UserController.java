@@ -6,17 +6,15 @@
 package AES.Controllers;
 
 import AES.DAO.UserDAO;
-import AES.Model.Course;
 import AES.Model.User;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import org.springframework.stereotype.Controller;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,6 +24,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value="/user",method=RequestMethod.POST)
 public class UserController {
+    @RequestMapping(value="/test",method=RequestMethod.GET)
+    public void test(HttpServletResponse response) throws IOException{
+        System.out.println("test");
+        response.sendRedirect("/AES/index.html");
+    }
     @RequestMapping(value="/verify",method=RequestMethod.POST)
     public User verify(
              @RequestParam Map<String,String> requestParams
@@ -33,7 +36,6 @@ public class UserController {
     {
         String username = requestParams.get("username");
         String password = requestParams.get("password");
-        System.out.println("Test");
         User user = UserDAO.getUserByUsernameAndPassword(username,password );
         return user;
     }

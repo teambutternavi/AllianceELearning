@@ -23,7 +23,7 @@
     src: url('../fonts/Roboto-Light.ttf');
 }
 
-* {
+button, input, .btn, textarea, .panel, .panel-heading {
     border-radius: 0 !important;
 }
 
@@ -104,19 +104,19 @@ body {
     color: #ffffff;
 }
 
-footer {
+.site-footer {
     background-color: #40586f;
     border-top: 7px solid;
     border-color: #2980b9;
     padding: 30px 0 30px 0;
 }
 
-.footer-nav h4 {
+.footer-navigation h4 {
     color: #ecf0f1;
     font-weight: 600;
 }
 
-.footer-nav ul li a, .about-us p {
+.footer-navigation ul li a, .about-us p {
     color: #ecf0f1;
     font-size: .9em;
 }
@@ -253,4 +253,44 @@ footer {
 
 .login-url:hover {
     color: #fff;
+}
+
+.profile-box {
+    background: #fff;
+}
+
+.profile-pic-box {
+    height: 300px;
+    background: #2980b9;
+    padding-top: 15px;
+}
+
+.question-preview-box {
+    height: 500px;
+    background: #2980b9;
+    padding-top: 15px;
+}
+
+.exam-box {
+    background: #fff;
+}
+
+.the-question {
+    padding-top: 21px;
+}
+
+.second-row-choice {
+    margin-top: 15px;
+}
+
+.choice-box {
+    margin-top: 50px;
+}
+
+.exam-pager {
+    margin-top: 150px;
+}
+
+.course-post-heading {
+    background: #2980b9 !important;
 }

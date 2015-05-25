@@ -6,6 +6,7 @@ This JSP is here to provide a redirect to the dispatcher
 servlet but should be the only JSP outside of WEB-INF.
 --%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<% 
-    System.out.println("nisud sa redirect");
-    response.sendRedirect("index.jsp"); %>
+<%
+    System.out.println("Nisud ko sa redirect.jsp");
+    response.sendRedirect("index.html");
+%>
