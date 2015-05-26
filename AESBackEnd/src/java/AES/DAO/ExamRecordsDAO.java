@@ -199,7 +199,7 @@ public class ExamRecordsDAO {
    public static List<Exam> getExams(int userid){
    List<Exam> exams = new ArrayList();
    try{
-    String sql = "Select examid, score from examrecords where userid=?";
+    String sql = "Select examid from examrecords where userid=?";
     PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
     ps.setInt(1, userid);
     ResultSet rs = ps.executeQuery();
@@ -217,9 +217,7 @@ public static void main(String args[]) throws IOException, ClassNotFoundExceptio
     for(User s: getExaminers(3)){
        System.out.println("\t"+ s.getUsername()+ "\t"+ s.getUserid());
        }*/
-    for(Exam s: getExams(5)){
-       System.out.println("\t"+ s.getTitle()+ "\t"+ s.getDescription() + "\t" +s.getFilepath());
-       }
+ 
    }
    
    

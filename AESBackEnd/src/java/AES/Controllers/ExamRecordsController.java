@@ -49,9 +49,7 @@ public class ExamRecordsController {
     public boolean exists(@RequestParam Map<String, String> requestParams) throws IOException, ClassNotFoundException, SQLException{
     return ExamRecordsDAO.exists(Integer.parseInt(requestParams.get("id")));
     }
-   
-  ///////////////////////////////// not tested
-    
+ 
     @RequestMapping(value="/editExamRecord", method=RequestMethod.GET)
     public boolean editExamRecord(@RequestParam Map<String, String> requestParams) throws IOException, ClassNotFoundException, SQLException{
     return ExamRecordsDAO.editExamRecord(Integer.parseInt(requestParams.get("id")), Integer.parseInt(requestParams.get("examid")), Integer.parseInt(requestParams.get("userid")),Integer.parseInt(requestParams.get("score")), Date.valueOf(requestParams.get("date")) );
@@ -59,15 +57,17 @@ public class ExamRecordsController {
     @RequestMapping(value="/getExamRecordByUserid", method=RequestMethod.GET)
     public List<Examrecords> getExamRecordByUserid(@RequestParam Map<String, String> requestParams){
     return ExamRecordsDAO.getExamRecordByUserid(Integer.parseInt(requestParams.get("userid")));
-    }
+    }      
     @RequestMapping(value="/getExamRecordByExamid", method=RequestMethod.GET)
     public List<Examrecords> getExamRecordByExamid(@RequestParam Map<String, String> requestParams){
     return ExamRecordsDAO.getExamRecordByExamid(Integer.parseInt(requestParams.get("examid")));
     }
+   
     @RequestMapping(value="/getExaminers", method=RequestMethod.GET)
     public List<User> getExaminers(@RequestParam Map<String, String> requestParams){
     return ExamRecordsDAO.getExaminers(Integer.parseInt(requestParams.get("examid")));
     }
+    
     @RequestMapping(value="/getExams", method=RequestMethod.GET)
     public List<Exam> getExams(@RequestParam Map<String, String> requestParams){
     return ExamRecordsDAO.getExams(Integer.parseInt(requestParams.get("userid")));
