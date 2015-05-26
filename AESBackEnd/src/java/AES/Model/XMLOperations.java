@@ -16,6 +16,7 @@ import org.w3c.dom.NodeList;
  * @author Ted Ian Osias
  */
 public class XMLOperations {
+    public static String examFolder = "exam/";
     public static List<Element> removeNodesWithoutText(NodeList nodelist){
         List<Element> elems = new ArrayList<>();
         for(int i=0;i<nodelist.getLength();i++){

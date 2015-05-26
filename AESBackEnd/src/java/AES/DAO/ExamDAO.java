@@ -10,12 +10,15 @@ import static AES.DAO.UserDAO.exists;
 import static AES.DAO.UserDAO.getUserByID;
 import AES.Model.Exam;
 import AES.Model.User;
+import AES.Model.XMLOperations;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 /**
  *
@@ -155,6 +158,22 @@ public class ExamDAO {
         catch(Exception e){e.printStackTrace();}
         return temp;
     }
-    public static void main(String args[]){
+    public static void main(String args[]) throws ParserConfigurationException, TransformerException{
+        Exam ex = new Exam();
+        AES.Model.Question q1 = new AES.Model.Question();
+        q1.setMessage("Question 1");
+        q1.addPossibleAnswer("Answer1");
+        q1.addPossibleAnswer("Answer2");
+        q1.addCorrecteAnswer("Answer1");
+        ex.addQuestion(q1);
+        AES.Model.Question q2 = new AES.Model.Question();
+        q2.setMessage("Question 2");
+        q2.addPossibleAnswer("Answer1");
+        q2.addPossibleAnswer("Answer2");
+        q2.addCorrecteAnswer("Answer2");
+        ex.addQuestion(q2);
+        ex.generateXMLToDefaultPath("exam2");
+        
+        
     }
 }

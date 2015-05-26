@@ -5,22 +5,16 @@
  */
 package AES.Model;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
 import org.w3c.dom.Text;
 
 /**
@@ -73,11 +67,8 @@ public class Question {
             c_answers.add(answer);
     }
 
-    public void addToParentElement(Element parent) throws ParserConfigurationException, TransformerConfigurationException, TransformerException{
-                Document doc = parent.getOwnerDocument();
+    public Node generateElement(Document doc) throws ParserConfigurationException, TransformerConfigurationException, TransformerException{
                 Element rootElement = doc.createElement("question");
-		parent.appendChild(rootElement);
- 
 		Element question = doc.createElement("message");
 		question.appendChild(doc.createTextNode(getMessage()));
                 rootElement.appendChild(question);
@@ -98,6 +89,7 @@ public class Question {
                     correctAnswers.appendChild(answer);
                 }
                 rootElement.appendChild(correctAnswers);
+                return rootElement;
     }
     public static void main(String args[])throws Exception{
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -160,4 +152,5 @@ public class Question {
             str+= s +"\n";
         return str;
     }
+
 }

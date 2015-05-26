@@ -59,6 +59,12 @@ public class Exam  implements java.io.Serializable {
         }
         return str;
     }
+    public void generateXMLToDefaultPath(String title) throws ParserConfigurationException, TransformerException{
+        String path = XMLOperations.examFolder+title;
+        if(!path.endsWith(".xml"))
+            path+= ".xml";
+        generateXML(path);
+    }
     public void generateXML(String path) throws ParserConfigurationException, TransformerException{
         generateXML(new File(path));
     }
@@ -69,7 +75,7 @@ public class Exam  implements java.io.Serializable {
         Element root = doc.createElement("Exam");
         doc.appendChild(root);
         for(Question q:this.question)
-            q.addToParentElement(root);
+            root.appendChild(q.generateElement(root.getOwnerDocument()));
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(doc);
@@ -95,28 +101,7 @@ public class Exam  implements java.io.Serializable {
         }
         return exam;
     }
-    public static void main(String args[]) throws ParserConfigurationException, TransformerException, SAXException, IOException{
-       /*
-        Exam ex = new Exam();
-        Question q = new Question();
-        q.setMessage("Mao ni question");
-        q.addPossibleAnswer("1");
-        q.addPossibleAnswer("2");
-        q.addPossibleAnswer("3");
-        q.addCorrecteAnswer("1");
-        ex.addQuestion(q);
-        q = new Question();
-        q.setMessage("Mao ni question 2");
-        q.addPossibleAnswer("a");
-        q.addPossibleAnswer("b");
-        q.addPossibleAnswer("c");
-        q.addCorrecteAnswer("a");
-        ex.addQuestion(q);
-        ex.generateXML("test.xml");
-         */       
-        Exam ex = Exam.generateExam("test.xml");
-        System.out.println(ex.toString());
-    }
+   
     
    //// HIBERNATE GENERATED
     public Integer getId() {
