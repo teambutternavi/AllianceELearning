@@ -21,22 +21,77 @@ import java.util.List;
  * @author asi
  */
 public class PresentationDAO {
-    public static void addPresentation(String title,String filepath,String author,int creatorid) throws IOException, ClassNotFoundException, SQLException, Exception{
-            if(!contains(title)){
-             String query="Insert into presentation title,author,filepath,creatorid) values(?,?,?,?)";
-             PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
-             ps.setString(1, title);
-             ps.setString(2, author);
-             ps.setString(3,filepath);
-             ps.setInt(4, creatorid);
-             ps.execute();
+    public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException, Exception {
+       /* List<String> filepath = new ArrayList();
+        filepath.add("filepathnew");
+        filepath.add("c:tae");
+        filepath.add("sd");
+       System.out.println(getTitlesByPaths(filepath));*/
+       
+    }
+   
+   public static boolean exist(String filepath){
+       boolean b=false;
+       try{
+        String query="Select * from presentation";
+        PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
+        ResultSet rs=ps.executeQuery();
+        while(rs.next()){
+        if(rs.getString("filepath").equals(filepath)){b=true;}
+        }
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+    return b;
+    }
+   
+   public  static String getTitleByPath(String filepath) {
+   String title=null;
+    if(exist(filepath)){
+        try{
+            String query="Select title from presentation where filepath=?";
+            PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
+            ps.setString(1,filepath);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+            title=rs.getString("title");
+            }   
+        }
+        catch(Exception e){e.printStackTrace();}
+   }
+   return title;
+   }
+   
+   public static List<String> getTitlesByPaths(List<String> filepath) {
+    List<String> titles = new ArrayList();
+    for(String s: filepath){
+        if(exist(s)){
+        titles.add(getTitleByPath(s));
+        } 
+    }
+    return titles;
+    }
+   public static void addPresentation(String title,String filepath,String author,int creatorid) throws IOException, ClassNotFoundException, SQLException, Exception{
+            if(exist(filepath)){
+                if(!contains(title)){
+                    String query="Insert into presentation (title,author,filepath,creatorid,description) values(?,?,?,?,?)";
+                    PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
+                    ps.setString(1, title);
+                    ps.setString(2, author);
+                    ps.setString(3,filepath);
+                    ps.setInt(4, creatorid);
+                    ps.setString(5, "");
+                    ps.execute();
+                   }
+                else throw new Exception("title already exists");
             }
-            else throw new Exception("title already exists");
+            else throw new Exception("filepath doesnt exists");
     
     }
         public static void addPresentation(String title,String filepath,String author,int creatorid,String description) throws IOException, ClassNotFoundException, SQLException, Exception{   
-               if(!contains(title)){
-             String query="Insert into presentation (title,author,filepath,creatorid,description) values(?,?,?,?,?)";
+            if(exist(filepath)){
+            if(!contains(title)){
+            String query="Insert into presentation (title,author,filepath,creatorid,description) values(?,?,?,?,?)";
             PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
              ps.setString(1, title);
              ps.setString(2, author);
@@ -46,7 +101,8 @@ public class PresentationDAO {
              ps.execute();
                }
                else throw new Exception("title already exists") ;
-                
+            }
+             else throw new Exception("filepath doesnt exists");
     
     }
                 public static void addPresentation(Presentation p) throws IOException, ClassNotFoundException, SQLException, Exception{   
@@ -179,12 +235,29 @@ public static boolean contains(int id) throws IOException, ClassNotFoundExceptio
        b=rs.next();
     return b;
 }
+public static String getPresentationFilepath(String title) throws IOException, ClassNotFoundException, SQLException, Exception{
+    String path=null;
+    if(contains(title)){
+    try
+    {
+     {
+        String query="Select filepath from presentation where title=?";
+        PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
+        ps.setString(1, title);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+         path= rs.getString("filepath");
+         }
+      }
+    }
+    catch(Exception e){e.printStackTrace();}
+ } 
+ return path;
+}
     
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException, Exception {
-           
-    }
+    
     
 }
