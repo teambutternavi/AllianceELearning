@@ -77,8 +77,12 @@ public class FileController {
 							"<br/>TO STRING: " + fileItem.toString()
 							);
 					out.println("</td>");
-                                      String path = request.getSession().getServletContext().getContextPath() + File.pathSeparator + "upload" + File.pathSeparator;
-                                      fileItem.write(new File("/upload/"+fileItem.getString()));
+                                      String path = request.getSession().getServletContext().getRealPath("")+"\\uploads\\";
+                                      //System.out.println(request.getSession().getServletContext().getRealPath(""));
+                                      File f = new File(path +fileItem.getName());
+                                      if(!f.exists())
+                                          f.createNewFile();
+                                      fileItem.write(f);
 				}
 				out.println("</tr>");
 			}
