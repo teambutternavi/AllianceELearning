@@ -78,4 +78,12 @@ public class PresentationController {
     )throws IOException, SQLException, ClassNotFoundException, Exception{
       return  PresentationDAO.getPresentationFilepath(requestParams.get("title"));
     }
+    @RequestMapping(value="/exist", method=RequestMethod.GET)
+        public boolean exist(@RequestParam Map<String,String> requestParams){
+        return PresentationDAO.exist(requestParams.get("filepath"));
+        }
+     @RequestMapping(value="/getTitleByPath", method=RequestMethod.GET)
+       public String getTitleByPath(@RequestParam Map<String,String> requestParams){
+        return PresentationDAO.getTitleByPath(requestParams.get("filepath"));
+        }
 }
