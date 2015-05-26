@@ -15,8 +15,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -25,26 +23,29 @@ import java.util.logging.Logger;
 public class CourseDAO {
         
     public static Course createCourse(String title,String description) throws SQLException, IOException, ClassNotFoundException{
-        Date date = Date.valueOf(LocalDate.now());
-        String sql = "Insert into Course (title,creation,description) value (?,?,?)";
-        PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
-        Course cs = new Course();
-        ps.setString(1, title);
-        ps.setString(3, description);
-        ps.setDate(2, date);
-        ps.execute();
-        sql = "Select id from course where title=? and creation=? and description=?";
-        ps = DatabaseManager.getInstance().getStatement(sql);
-        ps.setString(1, title);
-        ps.setString(3, description);
-        ps.setDate(2, date);
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        int id = rs.getInt("id");
-        cs.setTitle(title);
-        cs.setDescription(description);
-        cs.setCreation(date);
-        cs.setId(id);
+        Course cs = null;
+        if(CourseDAO.exists(title)){
+            Date date = Date.valueOf(LocalDate.now());
+            String sql = "Insert into Course (title,creation,description) value (?,?,?)";
+            PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
+            cs = new Course();
+            ps.setString(1, title);
+            ps.setString(3, description);
+            ps.setDate(2, date);
+            ps.execute();
+            sql = "Select id from course where title=? and creation=? and description=?";
+            ps = DatabaseManager.getInstance().getStatement(sql);
+            ps.setString(1, title);
+            ps.setString(3, description);
+            ps.setDate(2, date);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            int id = rs.getInt("id");
+            cs.setTitle(title);
+            cs.setDescription(description);
+            cs.setCreation(date);
+            cs.setId(id);
+        }
         return cs;
     }
     public static void removeCourse(Course cs)throws IOException, ClassNotFoundException, SQLException{ removeCourse(cs.getId()); }
@@ -108,13 +109,25 @@ public class CourseDAO {
         ps.execute();
     }
     public static boolean exists(Course cs)throws IOException, ClassNotFoundException, SQLException{
-        return exists(cs.getId());
+        return exists(cs.getTitle())||exists(cs.getId());
     }
+    
     public static boolean exists(int id)throws IOException, ClassNotFoundException, SQLException{
         boolean ok = false;
         String sql = "Select * from course where id=?";
         PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
         ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+        if(rs.next()){
+            ok = true;
+        }
+        return ok;
+    }
+    public static boolean exists(String title)throws IOException, ClassNotFoundException, SQLException{
+        boolean ok = false;
+        String sql = "Select * from course where title=?";
+        PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
+        ps.setString(1, title);
         ResultSet rs = ps.executeQuery();
         if(rs.next()){
             ok = true;
