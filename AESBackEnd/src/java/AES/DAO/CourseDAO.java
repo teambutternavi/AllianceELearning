@@ -84,6 +84,21 @@ public class CourseDAO {
             }
             return c1;
     }
+    public static Course getCourseByTitle(String title) throws SQLException, IOException, ClassNotFoundException{
+            Course c1= null;
+            String sql = "Select * from Course where title=?";
+            PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
+            ps.setString(1, title);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                c1 = new Course();
+                c1.setId(rs.getInt("id"));
+                c1.setDescription(rs.getString("description"));
+                c1.setTitle(rs.getString("title"));
+                c1.setCreation(rs.getDate("creation"));
+            }
+            return c1;
+    }
     public static List<Course> getAllCourseTakenBy(int traineeid) throws SQLException, IOException, ClassNotFoundException{
             List<Course> temp = new ArrayList<>();
             String sql = "Select courseid from coursetrainee where traineeid=?";
@@ -101,7 +116,7 @@ public class CourseDAO {
             return temp;
     }
     public static void updateCourse(int id,String title,String description) throws SQLException, IOException, ClassNotFoundException{
-        String sql = "Update courses set title=?,description=? where id=?";
+        String sql = "Update course set title=?,description=? where id=?";
         PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
         ps.setString(1, title);
         ps.setString(2, description);
@@ -184,5 +199,6 @@ public class CourseDAO {
         }
         return temp;
     }
+    
     
 }
