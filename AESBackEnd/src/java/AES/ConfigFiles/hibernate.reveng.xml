@@ -2,9 +2,11 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="springpractice"/>
-  <table-filter match-name="exam"/>
-  <table-filter match-name="course"/>
-  <table-filter match-name="presentation"/>
   <table-filter match-name="user"/>
+  <table-filter match-name="userinfo"/>
+  <table-filter match-name="exam"/>
+  <table-filter match-name="presentation"/>
+  <table-filter match-name="coursetrainee"/>
   <table-filter match-name="examrecords"/>
+  <table-filter match-name="course"/>
 </hibernate-reverse-engineering>

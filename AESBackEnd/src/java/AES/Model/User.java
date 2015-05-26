@@ -1,5 +1,5 @@
 package AES.Model;
-// Generated May 21, 2015 1:38:17 PM by Hibernate Tools 4.3.1
+// Generated May 26, 2015 3:00:19 PM by Hibernate Tools 4.3.1
 
 
 
@@ -13,6 +13,7 @@ public class User  implements java.io.Serializable {
      private String username;
      private String password;
      private Integer usertype;
+     private Userinfo userinfo;
 
     public User() {
     }
@@ -21,10 +22,11 @@ public class User  implements java.io.Serializable {
     public User(String username) {
         this.username = username;
     }
-    public User(String username, String password, Integer usertype) {
+    public User(String username, String password, Integer usertype, Userinfo userinfo) {
        this.username = username;
        this.password = password;
        this.usertype = usertype;
+       this.userinfo = userinfo;
     }
    
     public Integer getUserid() {
@@ -54,6 +56,13 @@ public class User  implements java.io.Serializable {
     
     public void setUsertype(Integer usertype) {
         this.usertype = usertype;
+    }
+    public Userinfo getUserinfo() {
+        return this.userinfo;
+    }
+    
+    public void setUserinfo(Userinfo userinfo) {
+        this.userinfo = userinfo;
     }
 
 

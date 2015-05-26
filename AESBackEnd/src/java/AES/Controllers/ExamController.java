@@ -9,6 +9,7 @@ import AES.DAO.ExamDAO;
 import AES.Model.Exam;
 import java.util.List;
 import java.util.Map;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -39,8 +40,9 @@ public class ExamController {
     return ExamDAO.removeExam(requestParams.get("title"));
     } 
     @RequestMapping(value="/addExam", method=RequestMethod.GET)
-    public boolean addExam(@RequestParam Map<String, String> requestParams){
-    return ExamDAO.addExam(requestParams.get("title"), requestParams.get("description"), requestParams.get("filepath"),Integer.parseInt(requestParams.get("score")),Integer.parseInt(requestParams.get("creatorid")));
+    public boolean addExam(@RequestParam Map<String, String> requestParams, @RequestBody Exam exam){
+        
+        return ExamDAO.addExam(requestParams.get("title"), requestParams.get("description"), requestParams.get("filepath"),Integer.parseInt(requestParams.get("score")),Integer.parseInt(requestParams.get("creatorid")));
     }
     @RequestMapping(value="/editExam", method=RequestMethod.GET)
     public boolean editExam(@RequestParam Map<String, String> requestParams){

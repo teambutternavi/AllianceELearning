@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated May 21, 2015 1:38:18 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated May 26, 2015 3:01:09 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="AES.Model.User" table="user" catalog="springpractice" optimistic-lock="version">
         <id name="userid" type="java.lang.Integer">
@@ -17,5 +17,6 @@
         <property name="usertype" type="java.lang.Integer">
             <column name="usertype" />
         </property>
+        <one-to-one name="userinfo" class="AES.Model.Userinfo"></one-to-one>
     </class>
 </hibernate-mapping>

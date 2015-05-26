@@ -24,11 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value="/user",method=RequestMethod.POST)
 public class UserController {
-    @RequestMapping(value="/test",method=RequestMethod.GET)
-    public void test(HttpServletResponse response) throws IOException{
-        System.out.println("test");
-        response.sendRedirect("/AES/index.html");
-    }
     @RequestMapping(value="/verify",method=RequestMethod.POST)
     public User verify(
              @RequestParam Map<String,String> requestParams
