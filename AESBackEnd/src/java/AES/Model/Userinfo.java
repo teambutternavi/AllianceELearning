@@ -15,8 +15,8 @@ public class Userinfo  implements java.io.Serializable {
      private String firsname;
      private String lastname;
      private Integer age;
-     private Date department;
-     private Date position;
+     private String department;
+     private int position;
 
     public Userinfo() {
     }
@@ -25,7 +25,7 @@ public class Userinfo  implements java.io.Serializable {
     public Userinfo(User user) {
         this.user = user;
     }
-    public Userinfo(User user, String firsname, String lastname, Integer age, Date department, Date position) {
+    public Userinfo(User user, String firsname, String lastname, Integer age, String department, int position) {
        this.user = user;
        this.firsname = firsname;
        this.lastname = lastname;
@@ -69,18 +69,18 @@ public class Userinfo  implements java.io.Serializable {
     public void setAge(Integer age) {
         this.age = age;
     }
-    public Date getDepartment() {
+    public String getDepartment() {
         return this.department;
     }
     
-    public void setDepartment(Date department) {
+    public void setDepartment(String department) {
         this.department = department;
     }
-    public Date getPosition() {
+    public int getPosition() {
         return this.position;
     }
     
-    public void setPosition(Date position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 
