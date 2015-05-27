@@ -82,6 +82,7 @@ public class UserInfoDAO {
         user.setPosition(rs.getInt("position"));
         user.setDepartment(rs.getString("department"));
         user.setUser(UserDAO.getUserByID(rs.getInt("userid")));
+        user.getUser().setUserinfo(user);
         return user;}
         else throw new Exception("user does not exist");
     }
