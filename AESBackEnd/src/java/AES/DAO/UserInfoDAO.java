@@ -35,14 +35,14 @@ public class UserInfoDAO {
         else throw new Exception("no such user exists, idiot!");
     }
     
-    public static void removeUserInfo(int userid)throws IOException, ClassNotFoundException, SQLException, Exception
+    public static void removeUserInfo(int userid)throws IOException, ClassNotFoundException, SQLException
     {
         if(contains(userid)){
         String query="Delete from userinfo where userid=?";
         PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
         ps.setInt(1,userid);
         ps.execute();}
-        else throw new Exception("user does not exist");
+        else throw new SQLException("user does not exist");
     }
     public static void editUserInfo(int userid, String firstname,String lastname,int age, String department,int position)throws IOException, ClassNotFoundException, SQLException, Exception
     { if(contains(userid)){
@@ -58,7 +58,7 @@ public class UserInfoDAO {
         }
         else throw new Exception("user does not exist");
     }
-    public static boolean contains(int id)throws IOException, ClassNotFoundException, SQLException, Exception
+    public static boolean contains(int id)throws IOException, ClassNotFoundException, SQLException
     {
         String query="Select * from userinfo where userid=?";
         PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);

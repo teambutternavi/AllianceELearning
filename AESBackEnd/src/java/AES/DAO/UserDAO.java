@@ -39,15 +39,18 @@ public class UserDAO {
         return ok;
     }
     public static boolean removeUser(User user){
-        return removeUser(user.getUsername());
+        return removeUser(user.getUsername(),user.getPassword());
     }
-    public static boolean removeUser(String username){
+    public static boolean removeUser(String username, String password){
         boolean ok = false;
         try{
-        String sql = "Delete from user where username=?";
+        int id = UserDAO.getUserByUsernameAndPassword(username, password).getUserid();
+        String sql = "Delete from user where username=? and password=?";
         PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
         ps.setString(1, username);
+        ps.setString(2, password);
         ok = ps.execute();
+        UserInfoDAO.removeUserInfo(id);
         }
         catch(IOException | ClassNotFoundException | SQLException e){}
         return ok;
