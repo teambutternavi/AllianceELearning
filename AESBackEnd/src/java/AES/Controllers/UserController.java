@@ -6,7 +6,9 @@
 package AES.Controllers;
 
 import AES.DAO.UserDAO;
+import AES.DAO.UserInfoDAO;
 import AES.Model.User;
+import AES.Model.Userinfo;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -84,6 +86,14 @@ public class UserController {
     @RequestMapping(value="/deleteUser",method=RequestMethod.POST)
     public boolean deleteUser(@RequestParam Map<String,String> requestParams){
         return UserDAO.removeUser(requestParams.get("username"),requestParams.get("password"));
+    }
+    @RequestMapping(value="/getUser",method=RequestMethod.POST)
+    public User getUserById(@RequestParam Map<String,String> requestParams){
+        return UserDAO.getUserByID(Integer.parseInt((String)requestParams.get("id")));
+    }
+    @RequestMapping(value="/getUserInfo",method=RequestMethod.POST)
+    public Userinfo getUserInfoById(@RequestParam Map<String,String> requestParams) {
+        return UserInfoDAO.getUserInfoById(Integer.parseInt(requestParams.get("id")));
     }
     
     

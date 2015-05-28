@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -58,33 +60,51 @@ public class UserInfoDAO {
         }
         else throw new SQLException("user does not exist");
     }
-    public static boolean contains(int id)throws IOException, ClassNotFoundException, SQLException
+    public static boolean contains(int id)
     {
-        String query="Select * from userinfo where userid=?";
-        PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
-        ps.setInt(1, id);
-        ResultSet rs=ps.executeQuery();
-        return rs.next();
+        boolean ok = false;
+        try {
+            
+            
+            String query="Select * from userinfo where userid=?";
+            PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
+            ps.setInt(1, id);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next())
+                ok = true;
+            
+        } catch (SQLException | IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } 
+        return ok;
     }
-    public static Userinfo getUserInfoById(int id)throws IOException, ClassNotFoundException, SQLException
+    public static Userinfo getUserInfoById(int id)
     {
-        if(contains(id)){
-        Userinfo user=new Userinfo();
-        String query="Select * from userinfo where userid=?";
-        PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
-        ps.setInt(1, id);
-        ResultSet rs=ps.executeQuery();
-        rs.next();
-        user.setUserid(rs.getInt("userid"));
-        user.setAge(rs.getInt("age"));
-        user.setFirsname(rs.getString("firstname"));
-        user.setLastname(rs.getString("lastname"));
-        user.setPosition(rs.getInt("position"));
-        user.setDepartment(rs.getString("department"));
-        user.setUser(UserDAO.getUserByID(rs.getInt("userid")));
-        user.getUser().setUserinfo(user);
-        return user;}
-        else throw new SQLException("user does not exist");
+        Userinfo user = null;
+        try {
+            if(contains(id)){
+            
+                user=new Userinfo();
+                String query="Select * from userinfo where userid=?";
+                PreparedStatement ps=DatabaseManager.getInstance().getStatement(query);
+                ps.setInt(1, id);
+                ResultSet rs=ps.executeQuery();
+                rs.next();
+                user.setUserid(rs.getInt("userid"));
+                user.setAge(rs.getInt("age"));
+                user.setFirsname(rs.getString("firstname"));
+                user.setLastname(rs.getString("lastname"));
+                user.setPosition(rs.getInt("position"));
+                user.setDepartment(rs.getString("department"));
+                user.setUser(UserDAO.getUserByID(rs.getInt("userid")));
+                user.getUser().setUserinfo(user);
+            
+            }
+        } catch (SQLException | IOException | ClassNotFoundException ex) {
+                Logger.getLogger(UserInfoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
+        
     }
     public static List<Userinfo> getAllUserInfo()throws IOException, ClassNotFoundException, SQLException
     {
