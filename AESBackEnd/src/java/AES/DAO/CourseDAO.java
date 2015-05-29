@@ -21,7 +21,6 @@ import java.util.List;
  * @author Ted Ian Osias
  */
 public class CourseDAO {
-        
     public static Course createCourse(String title,String description) throws SQLException, IOException, ClassNotFoundException{
         Course cs = null;
         if(CourseDAO.exists(title)){
@@ -101,7 +100,7 @@ public class CourseDAO {
     }
     public static List<Course> getAllCourseTakenBy(int traineeid) throws SQLException, IOException, ClassNotFoundException{
             List<Course> temp = new ArrayList<>();
-            String sql = "Select courseid from coursetrainee where traineeid=?";
+            String sql = "Select courseid from course_user where traineeid=?";
             PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
             ps.setInt(1, traineeid);
             ResultSet rs = ps.executeQuery();
@@ -149,11 +148,11 @@ public class CourseDAO {
         }
         return ok;
     }
-    public static void assignTraineeToCourse(User user, Course cs ) throws IOException, ClassNotFoundException, SQLException{
-        assignTraineeToCourse(user.getUserid(),cs.getId());
+    public static void assignUserToCourse(User user, Course cs ) throws IOException, ClassNotFoundException, SQLException{
+        assignUserToCourse(user.getUserid(),cs.getId());
     }
-    public static void assignTraineeToCourse(int userid, int courseid) throws IOException, ClassNotFoundException, SQLException{
-        String sql = "Insert into coursetrainee values(?,?)";
+    public static void assignUserToCourse(int userid, int courseid) throws IOException, ClassNotFoundException, SQLException{
+        String sql = "Insert into course_user values(?,?)";
         if(!exists(courseid)){
             throw new SQLException("Course "+courseid+" not found in database.");
         }
@@ -168,11 +167,11 @@ public class CourseDAO {
         ps.setInt(2, userid);
         ps.execute();
     }
-    public static void removeTraineeFromCourse(User user, Course cs ) throws IOException, ClassNotFoundException, SQLException{
-        removeTraineeFromCourse(user.getUserid(),cs.getId());
+    public static void removeUserFromCourse(User user, Course cs ) throws IOException, ClassNotFoundException, SQLException{
+        removeUserFromCourse(user.getUserid(),cs.getId());
     }
-    public static void removeTraineeFromCourse(int userid, int courseid) throws IOException, ClassNotFoundException, SQLException{
-        String sql = "Delete from coursetrainee where courseid=? and traineeid=?";
+    public static void removeUserFromCourse(int userid, int courseid) throws IOException, ClassNotFoundException, SQLException{
+        String sql = "Delete from course_user where courseid=? and traineeid=?";
         if(!exists(courseid)){
             throw new SQLException("Course "+courseid+" not found in database.");
         }
@@ -184,12 +183,12 @@ public class CourseDAO {
         ps.setInt(2, userid);
         ps.execute();
     }
-    public static List<User> getAllUsersTakingCourse(Course cs)throws IOException, ClassNotFoundException, SQLException{
-        return getAllUsersTakingCourse(cs.getId());
+    public static List<User> getAllUsersAssignedToCourse(Course cs)throws IOException, ClassNotFoundException, SQLException{
+        return getAllUsersAssignedToCourse(cs.getId());
     }
-    public static List<User> getAllUsersTakingCourse(int id)throws IOException, ClassNotFoundException, SQLException{
+    public static List<User> getAllUsersAssignedToCourse(int id)throws IOException, ClassNotFoundException, SQLException{
         List<User> temp = new ArrayList<>();
-        String sql = "Select traineeid from coursetrainee where courseid=?";
+        String sql = "Select traineeid from course_user where courseid=?";
         PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
@@ -200,5 +199,24 @@ public class CourseDAO {
         return temp;
     }
     
-    
+    public static List<User> getAllTraineesAssignedToCourse(Course cs)throws IOException, ClassNotFoundException, SQLException{
+        return getAllTraineesAssignedToCourse(cs.getId());
+    }
+    public static List<User> getAllUsersOfType(List<User> users,int type){
+        List<User> temp = new ArrayList<>();
+        for(User user:users){
+            if(user.getUsertype()==type)
+                temp.add(user);
+        }
+        return temp;
+    }
+    public static List<User> getAllTraineesAssignedToCourse(int id) throws IOException, ClassNotFoundException, SQLException{
+        return getAllUsersOfType(getAllUsersAssignedToCourse(id),UserDAO.UserType_Trainee);
+    }
+    public static List<User> getAllTrainersAssignedToCourse(int id) throws IOException, ClassNotFoundException, SQLException{
+        return getAllUsersOfType(getAllUsersAssignedToCourse(id),UserDAO.UserType_Trainer);
+    }
+    public static List<User> getAllAdminsAssignedToCourse(int id) throws IOException, ClassNotFoundException, SQLException{
+        return getAllUsersOfType(getAllUsersAssignedToCourse(id),UserDAO.UserType_Admin);
+    }
 }

@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,12 +26,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @RequestMapping(value="/verify",method=RequestMethod.POST)
     public User verify(
-             @RequestParam Map<String,String> requestParams
+             @RequestParam Map<String,String> requestParams,
+            HttpSession session 
     ) throws IOException
     {
         String username = requestParams.get("username");
         String password = requestParams.get("password");
         User user = UserDAO.getUserByUsernameAndPassword(username,password );
+        if(user!=null){
+            session.setAttribute("user", user);
+        }
         return user;
     }
     @RequestMapping(value="/trainees",method=RequestMethod.GET)

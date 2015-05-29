@@ -79,6 +79,9 @@ public class FileController {
 					out.println("</td>");
                                       String path = request.getSession().getServletContext().getRealPath("")+"\\uploads\\";
                                       //System.out.println(request.getSession().getServletContext().getRealPath(""));
+                                      File uploadFolder = new File(path);
+                                      if(!uploadFolder.exists())
+                                          uploadFolder.mkdir();
                                       File f = new File(path +fileItem.getName());
                                       if(!f.exists())
                                           f.createNewFile();

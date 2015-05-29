@@ -77,7 +77,7 @@ public class UserInfoDAO {
         rs.next();
         user.setUserid(rs.getInt("userid"));
         user.setAge(rs.getInt("age"));
-        user.setFirsname(rs.getString("firstname"));
+        user.setFirstname(rs.getString("firstname"));
         user.setLastname(rs.getString("lastname"));
         user.setPosition(rs.getInt("position"));
         user.setDepartment(rs.getString("department"));
@@ -95,7 +95,7 @@ public class UserInfoDAO {
         Userinfo use=new Userinfo();
         use.setUserid(rs.getInt("userid"));
         use.setAge(rs.getInt("age"));
-        use.setFirsname(rs.getString("firstname"));
+        use.setFirstname(rs.getString("firstname"));
         use.setLastname(rs.getString("lastname"));
         use.setPosition(rs.getInt("position"));
         use.setDepartment(rs.getString("department"));
@@ -116,7 +116,7 @@ public class UserInfoDAO {
         Userinfo use=new Userinfo();
         use.setUserid(rs.getInt("userid"));
         use.setAge(rs.getInt("age"));
-        use.setFirsname(rs.getString("firstname"));
+        use.setFirstname(rs.getString("firstname"));
         use.setLastname(rs.getString("lastname"));
         use.setPosition(rs.getInt("position"));
         use.setDepartment(rs.getString("department"));
@@ -139,7 +139,7 @@ public class UserInfoDAO {
         Userinfo use=new Userinfo();
         use.setUserid(rs.getInt("userid"));
         use.setAge(rs.getInt("age"));
-        use.setFirsname(rs.getString("firstname"));
+        use.setFirstname(rs.getString("firstname"));
         use.setLastname(rs.getString("lastname"));
         use.setPosition(rs.getInt("position"));
         use.setDepartment(rs.getString("department"));

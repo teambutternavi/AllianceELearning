@@ -158,7 +158,7 @@ public class ExamDAO {
         catch(Exception e){e.printStackTrace();}
         return temp;
     }
-    public static void main(String args[]) throws ParserConfigurationException, TransformerException{
+    public static void main(String args[]) throws ParserConfigurationException, TransformerException, IOException{
         Exam ex = new Exam();
         AES.Model.Question q1 = new AES.Model.Question();
         q1.setMessage("Question 1");
@@ -175,5 +175,9 @@ public class ExamDAO {
         ex.generateXMLToDefaultPath("exam2");
         
         
+    }
+
+    public static void addExam(Exam ex) {
+        ExamDAO.addExam(ex.getTitle(), ex.getDescription(), ex.getFilepath(), ex.getCreatorid(), ex.getScore());
     }
 }
