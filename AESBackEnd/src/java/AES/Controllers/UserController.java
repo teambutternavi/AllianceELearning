@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,12 +30,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
     @RequestMapping(value="/verify",method=RequestMethod.POST)
     public User verify(
-             @RequestParam Map<String,String> requestParams
+             @RequestParam Map<String,String> requestParams,
+            HttpSession session 
     ) throws IOException
     {
         String username = requestParams.get("username");
         String password = requestParams.get("password");
         User user = UserDAO.getUserByUsernameAndPassword(username,password );
+        if(user!=null){
+            session.setAttribute("user", user);
+        }
         return user;
     }
     @RequestMapping(value="/trainees",method=RequestMethod.GET)
@@ -59,7 +64,7 @@ public class UserController {
           user.setUsertype(Integer.parseInt(requestParams.get("type")));
           return UserDAO.addUser(user);
     }
-    @RequestMapping(value="/editUser",method=RequestMethod.POST)
+    @RequestMapping(value="/editUserA",method=RequestMethod.POST)
     public boolean editUser(
             @RequestParam Map<String,String> requestParams
     )
@@ -74,16 +79,16 @@ public class UserController {
         user.setUsertype(type);
         return editUser(user);
     }
-    @RequestMapping(value="/editUser",method=RequestMethod.POST)
+    @RequestMapping(value="/editUserB",method=RequestMethod.POST)
     public boolean editUser(@RequestBody User user){
         return UserDAO.editUser(user);
     }
     
-    @RequestMapping(value="/deleteUser",method=RequestMethod.POST)
+    @RequestMapping(value="/deleteUserA",method=RequestMethod.POST)
     public boolean deleteUser(@RequestBody User user){
         return UserDAO.removeUser(user);
     }
-    @RequestMapping(value="/deleteUser",method=RequestMethod.POST)
+    @RequestMapping(value="/deleteUserB",method=RequestMethod.POST)
     public boolean deleteUser(@RequestParam Map<String,String> requestParams){
         return UserDAO.removeUser(requestParams.get("username"),requestParams.get("password"));
     }
