@@ -98,11 +98,11 @@ public class CourseDAO {
             }
             return c1;
     }
-    public static List<Course> getAllCourseTakenBy(int traineeid) throws SQLException, IOException, ClassNotFoundException{
+    public static List<Course> getAllCourseTakenBy(int userId) throws SQLException, IOException, ClassNotFoundException{
             List<Course> temp = new ArrayList<>();
-            String sql = "Select courseid from course_user where traineeid=?";
+            String sql = "Select courseid from course_user where userId=?";
             PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
-            ps.setInt(1, traineeid);
+            ps.setInt(1, userId);
             ResultSet rs = ps.executeQuery();
             Course c1=null;
             while(rs.next()){
@@ -171,7 +171,7 @@ public class CourseDAO {
         removeUserFromCourse(user.getUserid(),cs.getId());
     }
     public static void removeUserFromCourse(int userid, int courseid) throws IOException, ClassNotFoundException, SQLException{
-        String sql = "Delete from course_user where courseid=? and traineeid=?";
+        String sql = "Delete from course_user where courseid=? and userId=?";
         if(!exists(courseid)){
             throw new SQLException("Course "+courseid+" not found in database.");
         }
@@ -188,13 +188,13 @@ public class CourseDAO {
     }
     public static List<User> getAllUsersAssignedToCourse(int id)throws IOException, ClassNotFoundException, SQLException{
         List<User> temp = new ArrayList<>();
-        String sql = "Select traineeid from course_user where courseid=?";
+        String sql = "Select userId from course_user where courseId=?";
         PreparedStatement ps = DatabaseManager.getInstance().getStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         while(rs.next()){
-            if(UserDAO.exists(rs.getInt("traineeid")))
-            temp.add(UserDAO.getUserByID(rs.getInt("traineeid")));
+            if(UserDAO.exists(rs.getInt("userId")))
+            temp.add(UserDAO.getUserByID(rs.getInt("userId")));
         }
         return temp;
     }

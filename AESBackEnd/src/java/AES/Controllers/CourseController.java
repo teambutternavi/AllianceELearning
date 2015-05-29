@@ -66,14 +66,14 @@ public class CourseController {
      @RequestMapping(value="/assignUserToCourse",method=RequestMethod.GET)//parameter (int id of trainee,int id of course)
     public void assignUserToCourse(@RequestParam Map<String,String> requestParams)throws IOException, SQLException, ClassNotFoundException, Exception
     {
-        CourseDAO.assignUserToCourse(Integer.parseInt(requestParams.get("traineeid")),Integer.parseInt(requestParams.get("courseid")));
+        CourseDAO.assignUserToCourse(Integer.parseInt(requestParams.get("userId")),Integer.parseInt(requestParams.get("courseId")));
     }
     
     
          @RequestMapping(value="/removeUserFromCourse",method=RequestMethod.GET)//parameter (int id of trainee,int id of course)
     public void removeUserFromCourse(@RequestParam Map<String,String> requestParams)throws IOException, SQLException, ClassNotFoundException, Exception
     {
-        CourseDAO.removeUserFromCourse(Integer.parseInt(requestParams.get("traineeid")),Integer.parseInt(requestParams.get("courseid")));
+        CourseDAO.removeUserFromCourse(Integer.parseInt(requestParams.get("userId")),Integer.parseInt(requestParams.get("courseId")));
     }
     
     @RequestMapping(value="/getAllUserTakingCourse",method=RequestMethod.GET)//parameter (int id of trainee,int id of course)
